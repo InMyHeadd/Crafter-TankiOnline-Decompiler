@@ -52,20 +52,23 @@ namespace CrafterTankiOnlineDecompiller
             using (FileStream filestream = File.Create("C:\\TankiDecompiled\\Spy.txt"))
             {
                 int Length = files.Length;
+                string local = "";
+                int ig = 0;
+                string ex = "";
+                string MD5 = "";
                 for (int i = 0; i < Length;)
                 {
                     label1.Text = "" + Length + '\\' + (i + 1);
-                    int ig = (int)Mathf.Clamp(((float)i + 1) / Length * 100f, 0f, 100f);
+                    ig = (int)Mathf.Clamp(((float)i + 1) / Length * 100f, 0f, 100f);
                     progressBar1.Value = ig;
                     label2.Text = "" + ig + "%";
-                    string local = "";
                     try
                     {
                         local = Path.GetFileName(Encoding.UTF8.GetString(Convert.FromBase64String(Path.GetFileName(files[i]))));
                     }
                     catch { i++; return; }
-                    string ex = Path.GetExtension(local).ToLower();
-                    string MD5 = Utils.MD5File(files[i]);
+                    ex = Path.GetExtension(local).ToLower();
+                    MD5 = Utils.MD5File(files[i]);
                     try
                     {
                         switch (ex)
